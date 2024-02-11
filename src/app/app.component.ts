@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +8,23 @@ import { io } from "socket.io-client";
 })
 export class AppComponent {
   title = 'smartCardReader';
+  data: any;
 
-  socket = io('http://localhost:3000');
+  socket: any;
 
-  constructor() {
+  constructor() {}
+
+  async startCardReader() {
+    this.socket = io('http://localhost:3000');
+    
     this.socket.connect();
     console.log('connected');
 
     this.socket.emit('readCard');
-    this.socket.on('reply', (data) => {
+
+    this.socket.on('reply', (data: any) => {
       console.log('received => ', data);
+      this.data = data;
     });
   }
-
 }

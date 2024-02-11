@@ -11,13 +11,4 @@ export class SmartCardReaderService {
   constructor() {
 
   }
-
-  sendDataToElectron() {
-    const dataToSend = {
-      message: 'Hello Electron!',
-    };
-
-    this.socket.emit('sendData', dataToSend);
-    console.log('Data sent to Electron:', dataToSend);
-  }
 }
